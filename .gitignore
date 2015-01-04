@@ -1,3 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+
+# These are now up as Gists, and should not be editedd locally
+2014 Staff Survey data cleanup.R
+Sheet_1.csv
