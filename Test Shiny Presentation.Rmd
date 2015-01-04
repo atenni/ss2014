@@ -1,0 +1,187 @@
+---
+title: 'AC Staff Survey: 2014'
+author: "Andrew Tennikoff & Lily Arasaratnam-Smith"
+date: "16 January 2015"
+output:
+  ioslides_presentation:
+    fig.width: 7
+    incremental: yes
+    keep_md: yes
+    transition: faster
+    widescreen: yes
+runtime: shiny
+---
+
+# Overview
+
+## Overview: About the survey
+
+``` {r, include=FALSE}
+library('likert')
+library('devtools')
+
+# Ideally use setwd(), but causes shinyapps.io problems
+# setwd('/Users/andrew/Documents/Code/R projects/2014 Staff Survey')
+
+# So... try to use source('some url'), but R can't read http*s* :-|
+# source('https://gist.github.com/atenni/2b859da145b6f99aa8b8')
+
+# So... use devtools::source_gist
+source_gist(id='https://gist.github.com/atenni/2b859da145b6f99aa8b8')
+```
+
+- **Total number of respondents:** `r sum(table(clean_data[2]))`
+- **Academic responses:** `r table(clean_data[2])[1]`
+- **Administration responses:** `r table(clean_data[2])[2]`
+- **Average time to complete:** [TODO]
+- **Total questions:** 20
+- **Total questions including "If… why?" questions:** 44 (!)
+
+## Overview: New… and Improved!
+
+- New questions:
+    - Chapel
+    - Deeper dive on communication
+    - Simple job satisfaction enhancements
+- Improved questions:
+    - But… _why?_
+    - Fix ambiguities ("management")
+    - Remove questions better suited to other forums ("level of job training on
+      commencement")
+
+## 
+
+## ~Overview: Year on year
+
+- 20 questions
+- 46 responses: (Academia: 20, Administration: 26)
+
+## ~Tangent: Thoughts on Likert-scale visualisations
+
+- Pros:
+    - Common
+    - Easy to understand
+    - Easy to compare
+
+## ~Tangent: Thoughts on Likert-scale visualisations
+
+- Cons:
+    - Assumes uniform scale
+    - Summary statistics with small sample sizes
+    - While the _mean_ (first statistical moment) describes the bulk of the
+      data, later moments such as _variance_ and _skewness_ contain important
+      infomation too
+    - (…but while we all understand what an average is, not everyone will be
+      familar with _variance_, _skewness_, _kurtosis_, etc.)
+
+## Solution: Don't summarise { .smaller }
+
+```{r, echo=FALSE}
+l <- likert(clean_data[c(3:7)])
+# knitr::kable(summary(l, ordered=FALSE))
+h3(names(clean_data[3]))
+table(clean_data[3])
+```
+
+## Solution: Don't summarise
+
+```{r, echo=FALSE}
+l <- likert(clean_data[c(3:7)])
+plot(l)
+```
+
+## Solution: Don't summarise
+
+```{r, echo=FALSE}
+l <- likert(clean_data[c(3:7)], grouping=clean_data[[2]])
+plot(l)
+```
+
+## Solution: Don't summarise
+
+```{r, echo=FALSE}
+l <- likert(clean_data[c(3:7)])
+plot(l, type='heat')
+```
+
+## Solution: Don't summarise
+
+```{r, echo=FALSE}
+l <- likert(clean_data[c(3:7)], grouping=clean_data[[2]])
+plot(l, type='density')
+```
+
+## 2014's responses [TODO: Year on year.]
+
+```{r, echo=FALSE}
+fluidPage(
+  verticalLayout(
+    selectInput("q_select",
+                label = "Question:",
+                choices = setNames(c(3:13, 22), names(clean_data[c(3:13, 22)])),
+                selectize=TRUE,
+                width='100%')
+    ),
+    
+    renderPlot({
+      q_num <- as.numeric(input$q_select)
+      q <- likert(clean_data[q_num])
+      q_title <- names(clean_data[q_num])  
+      
+      plot(q, wrap=20) + ggtitle(q_title) + theme(axis.text=element_text(size=12))
+    }, height=200, width=940)
+)
+```
+
+## 2014: Academia vs Administration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Shiny Presentation
+
+This R Markdown presentation is made interactive using Shiny. The viewers of the presentation can change the assumptions underlying what's presented and see the results immediately. 
+
+To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+
+## Slide with Interactive Plot
+
+```{r, echo=FALSE}
+inputPanel(
+  selectInput("n_breaks", label = "Number of bins:",
+              choices = c(10, 20, 35, 50), selected = 20),
+  
+  sliderInput("bw_adjust", label = "Bandwidth adjustment:",
+              min = 0.2, max = 2, value = 1, step = 0.2)
+)
+
+renderPlot({
+  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
+       xlab = "Duration (minutes)", main = "Geyser eruption duration")
+  
+  dens <- density(faithful$eruptions, adjust = input$bw_adjust)
+  lines(dens, col = "blue")
+})
+```
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Code and Output
+
+```{r}
+summary(cars)
+```
