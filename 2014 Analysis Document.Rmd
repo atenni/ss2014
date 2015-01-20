@@ -1,0 +1,563 @@
+---
+title: "2014 Staff Survey"
+author: "Andrew Tennikoff, Lily Arasaratnam-Smith"
+date: "January 15th, 2015"
+output: rmarkdown::tufte_handout
+---
+
+# 2014 Staff Survey
+
+In keeping with our normal practice, we present the detailed analysis of this years Alphacrucis Staff Survey.
+
+This document complements the high level overview presentation provided to all staff at the annual staff retreat.
+It is intended to go into further detail on each question, expand upon methodologies used and document the assumptions we have made.
+As in previous years - and in the spirit of open information, transparency and reproducible research - the quantitative dataset has been made available for further analysis. \marginnote{This copy of the dataset, along with the original version, are completely anonymous. The only difference between the two is that we don't include the qualitiative data in this copy, as we feel it has the potential to be \emph{more} identifiable.} We encourage individuals to perform their own analysis, particularly if their assumptions differ from ours, and present their findings to us all. To make this even easier, this PDF has been generated from a document written in *R Markdown* format, allowing the researcher to run all our computations on their own computer, and adjust them as they see fit.
+
+
+## Objectives of this analysis
+
+\newthought{In presenting the annual staff survey,} our objective is to convey the core themes of the data collected from staff, to staff, in a manner accessible to all staff. Note that this is not a statement about data accuracy, which it goes without saying should remain as high as possible at all times, but one of the scope of our analysis. There are many areas our analysis could have taken us, but we only persue those within the scope of our brief. This is not to say that analysis outside this scope is not interesting to us - we feel it provides a rich area of exploration and towards the end of this document have listed areas we would like to see our colleagues lend their skills to examining.
+
+\textbf{This is primarily a \emph{qualitative} study.} Although we collect quantitative data, its primary use is to categorise the qualitative feedback received. Secondary to this is it's use as a broad, high level overview of the survey to provide a context for the textual analysis to exist in.
+
+# Methodology: Data collection
+
+# Methodology: quantative data
+
+Any analysis of quantative data first needs to consider nature of the data itself in order to draw statistically valid conclusionsfrom it. Stanley Smith Stevens'[^sss1946] *Theory of Scales of Measurment* proposes a heirarchy of four levels:
+
+1. _Nominal data._ Unordered categorical data. (Example: Female, Male)
+2. _Ordinal data._ Ordered data, but with no measure of distance (Example: ranking fruit by colour - Very Orange, Pale Orange)
+3. _Interval data._ Ordered data where distance measurment is possible, but where there is no true zero point (Example: temperature measured in Celcius. It doesn't make sense to say 20C is twice as hot as 10C)
+4. _Ratio data._ Ordered data with a true zero point, where both distance, and fractions of distance between variables are possible. (Example: absolute tempreture measured in Kelvin.)
+
+\marginnote{We know that Strongly Agree is more positive than Agree, but we don't know by how much. Additionally, we don't know that the distance between Strongly Agree and Agree is the same as the distance between Neutral and Disagree.} Of these categories, the data collected via our Likert questions is of the type *ordinal*. Most important for this discussion is that __descriptive statistics such as the *mean* and *standard deviation*, or any parametric analysis based on the normal distribution, are invalid parameters for ordinal data.__ The results obtained by these measures on ordinal data are statistically meaningless.
+
+Despite this being relatively uncontroversial in methodological[^blaikie2003] or statistical[^clegg2008] texts, it is somewhat surprising how frequently even published researchers break these rules[^jamieson2004]. Allen and Seaman propose that "An underlying reason for analyzing ordinal data as interval data might be the contention that parametric statistical tests (based on the central limit theorem) are more powerful than nonparametric alternatives. Also, conclusions and interpretations of parametric tests might be considered easier to interpret and provide more information than nonparametric alternatives. However, treating ordinal data as interval (or even ratio) data without examining the values of the dataset and the objectives of the analysis can both mislead and misrepresent the findings of a survey."[^allen2007]
+
+It is our opinion then, that for the data collected via our Likert responses appropriate non-parametric statistical measures for centrality include the mode and median, and for the spread of the distrubutions, the interquartile ranges. Other valid measures may include the use of Kruskall-Models for measures of variance, Chi-Squared and Fisher Exact tests for measures for significance, and simple distribution free methods such as tabulations and frequency counts.
+
+Given the earlier statement that ours is primarily a qualitative analysis, we will adopt a conservative approach and restrict our quantitative attention to tabulations and frequency counts. Where we group responses into Academic and Administrative categories, it is to contextualise discussion about the textual responses, and we do not offer an opinion on whether one os more- or less-positive than the other. \marginnote{In light of discussions at Staff Retreat we will, however, propose that Fisher's exact test (with the extension to matricies greater than 2x2 offered by Freeman-Halton) provide a statistically rigourous starting point for any analysis into the differences between these two groups. This will be discussed more in the *Areas for further study* section, and we will provide P-values for tests of non-random associations between Academic and Administrative responses in the Appendix as a motivating example.}
+
+
+# Methodology: Visualisations
+
+The primary method for sumarising our Likert data will be via frequency tables. This will be visualised via *Diverging Stacked Bar Charts*. Robbins and Heiberger[^robbins2013] provide an excellent discussion on the benefits of this approach in *Design of Diverging Stacked Bar Charts for Likert Scales and Other Applications*.
+
+# Methodology: Thematic analysis
+
+[TODO: LA]
+
+
+
+
+
+
+# Assumptions
+
+\newpage
+
+# Results
+
+```{r, include=FALSE}
+library(xtable)
+library(reshape)
+library(likert)
+# Note: if you're getting likert package errors, it's recommended you install
+# the more up to date development version from GitHub
+# devtools::install_github('jbryer/likert') 
+
+lkt <- read.csv('Data/2014_likert_qs.csv') # import data
+lkt$StartDate <- as.Date(lkt$StartDate, "%Y-%m-%d") # format dates
+
+# Set factors
+lkt[c(3:14)] <- lapply(lkt[c(3:14)], factor, levels=c(
+  "Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"),
+  labels=c('SD', 'D', 'N', 'A', 'SA'))
+lkt[2]  <- lapply(lkt[2], factor, levels=c("Academia", "Administration"))
+
+# Add copy of data regrouped as "All staff" to ease ploting
+lkt_2 <- lkt
+lkt_2[,2] <- factor("All staff")
+lkt <- rbind(lkt, lkt_2)
+lkt[,2] <- ordered(lkt[,2], levels=c("All staff", "Academia", "Administration")) # Reorder levels
+
+# Rename cols
+colnames(lkt) <- c(
+  "StartDate",
+  "Do you work within Academia or Administration?",
+  "I think AC staff meetings are run well",
+  "I enjoy AC staff camps",
+  "AC graduation and other public events are run well",
+  "I feel valued by my manager for the work I do",
+  "I feel valued by my peers for the work I do",
+  "I feel I have the skills to do the job I've been asked to do",
+  "I have a clear understanding of the AC organisational structure",
+  "I feel I fit into the organisational culture of AC",
+  "I attend Chapel because I want to, not because I have to",
+  "The mission and vision of the College has been clearly communicated to me",
+  "I consider my office area and staff facilities adequate in order to perform my duties",
+  "I am likely to recommend AC as an employer of choice")
+
+# Set xtable options
+options(xtable.comment = FALSE)
+options(xtable.booktabs = TRUE)
+```
+
+\newthought{With the caveats mentioned above in mind,} we present a brief high level overview of the data to provide a context for the qualitative analysis in the next section.
+
+```{r, fig.height=8, fig.width=10, fig.fullwidth=TRUE, fig.caption="Normalised frequency counts for all responses, ordered from the highest number of Agree/Strongly Agree responses to the least. Includes response rates (n) for each question."}
+all_staff <- lkt[,2] == "All staff"
+plot(likert(lkt[all_staff, 3:14]), include.histogram = TRUE, wrap=30)
+```
+
+As can be seen in the right hand column, the response rates for each question remain $\ge$ 55 as indicated in grey, with the number of people not providing an answer indicated in red.
+
+\newpage
+
+```{r, fig.height=8, fig.width=10, fig.caption="TO DO"}
+all_staff <- lkt[,2] == "All staff"
+plot(likert(lkt[all_staff, 3:14]), type='density', facet=FALSE) + theme(legend.position='none')
+```
+
+Here we have overlayed the responses for each question via density plots, to get a broad sense of the uniformity (or otherwise) in responses across the questionaire.
+
+
+\newpage
+
+## I think AC staff meetings are run well
+
+For this first question we will "show our working" by displaying the underlying R commands used to create the summary table and plot. The commands only differ slightly between questions, so in the interests of brevity we will only present the results for the remaining questions.
+
+Frequency table of responses to the first question, grouped by staff type:
+
+```{r, results='asis'}
+q3_summary <- table(lkt[,2], lkt[,3]) # Create frequency counts for q3 grouped by staff type
+q3_summary <- addmargins(q3_summary, margin=2) # Add in row totals
+xtable(q3_summary, digits=0,
+       caption='Frequency count: "I think staff meetings are run well"')
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=3, fig.width=5, fig.cap = "I think AC staff meetings are run well"}
+q3_lkt <- likert(lkt[3], grouping = lkt[,2]) # Group q3 responses by staff type
+plot(q3_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     Well spaced out, good amount of info communicated, chance for connecting & reflecting
+ 
+                 Disagree  Boring, lack of opportunities to ask questions of leadership, repetitive info
+
+ Administration  Agree     Informative, fun, good to align goals, good to hear departmental updates
+ 
+                 Disagree  One-way communication, staff input is not solicited
+-------------------------------------------------------------------------------
+
+
+
+\newpage
+
+## I enjoy AC staff camps
+
+Frequency table of responses to the first question, grouped by staff type:
+
+```{r, results='asis', echo=FALSE}
+q <- 4
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 4
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## AC graduation and other public events are run well
+
+```{r, results='asis', echo=FALSE}
+q <- 5
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 5
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## I feel valued by my manager for the work I do
+
+```{r, results='asis', echo=FALSE}
+q <- 6
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 6
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## I feel valued by my peers for the work I do
+
+```{r, results='asis', echo=FALSE}
+q <- 7
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 7
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## I feel I have the skills to do the job I've been asked to do
+
+```{r, results='asis', echo=FALSE}
+q <- 8
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 8
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## I have a clear understanding of the AC organisational structure
+
+```{r, results='asis', echo=FALSE}
+q <- 9
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 9
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## I feel I fit into the organisational culture of AC
+
+```{r, results='asis', echo=FALSE}
+q <- 10
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 10
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## I attend Chapel because I want to, not because I have to
+
+```{r, results='asis', echo=FALSE}
+q <- 11
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 11
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## The mission and vision of the College has been clearly communicated to me
+
+```{r, results='asis', echo=FALSE}
+q <- 12
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 12
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## I consider my office area and staff facilities adequate in order to perform my duties
+
+```{r, results='asis', echo=FALSE}
+q <- 13
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 13
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+\newpage
+
+## I am likely to recommend AC as an employer of choice
+
+```{r, results='asis', echo=FALSE}
+q <- 14
+q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
+q_summary <- addmargins(q_summary, margin=2) # Add in row totals
+xtable(q_summary, digits=0,
+       caption=paste('Frequency count: ', names(lkt[q])) )
+```
+
+And the corresponding visualisation of the proportional frequency count, by staff type:
+
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+q <- 14
+q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
+plot(q_lkt, text.size=3, include.histogram=TRUE,
+     group.order=c('All staff', 'Academia', 'Administration'))
+```
+
+-------------------------------------------------------------------------------
+  Who             What     Why
+---------------  --------  ----------------------------------------------------
+ Academia        Agree     
+ 
+                 Disagree  
+
+ Administration  Agree     
+ 
+                 Disagree  
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+\newpage
+
+# Areas for further study
+
+- Time series
+- Independence of Academic and Administrative responses
+- Correlations
+- Time of response predictive of sentiment
+
+
+# Appendix 1: 
+
+
+[^sss1946]: S. S. Stevens, *Science.* 7 June 1946: **103** (2684), 677-680.
+[^blaikie2003]: Blaikie N. *Analysing Quantitative Data.* London: Sage Publications 2003.
+[^clegg2008]: Clegg F. *Simple Statistics.* Cambridge: Cambridge University Press 1998.
+[^jamieson2004]: Jamieson, Susan. "Likert scales: how to (ab) use them." *Medical education* 38.12 (2004): 1217-1218.
+[^allen2007]: Allen, I. Elaine, and Christopher A. Seaman. "Likert scales and data analyses." *Quality Progress* 40.7 (2007): 64-65.
+[^robbins2013]: Heiberger, Richard M., and Naomi B. Robbins. "Design of Diverging Stacked Bar Charts for Likert Scales and Other Applications." *Journal of Statistical Software* submitted (2013): 1-36.
