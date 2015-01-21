@@ -17,8 +17,8 @@ runtime: shiny
 ## Overview: About the survey
 
 ``` {r, include=FALSE}
-library('likert')
-library('devtools')
+#library('likert')
+#library('devtools')
 
 # Ideally use setwd(), but causes shinyapps.io problems
 # setwd('/Users/andrew/Documents/Code/R projects/2014 Staff Survey')
@@ -27,7 +27,110 @@ library('devtools')
 # source('https://gist.github.com/atenni/2b859da145b6f99aa8b8')
 
 # So... use devtools::source_gist
-source_gist(id='https://gist.github.com/atenni/2b859da145b6f99aa8b8')
+# devtools::source_gist(id='https://gist.github.com/atenni/2b859da145b6f99aa8b8')
+
+# But Windows sucks and has 
+# So use `eval`
+# library(RCurl)
+#   eval( expr = 
+#     parse(text=getURL("https://gist.githubusercontent.com/atenni/2b859da145b6f99aa8b8/raw/74701697d00556dc96ba0471b0189eea0dd2a51f/2014%20Staff%20Survey%20data%20cleanup.R",
+#           ssl.verifypeer=FALSE,
+#           cainfo="C:\\Users\\atennikoff\\Documents\\R\\win-library\\3.1\\RCurl\\CurlSSL\\ca-bundle.crt") ))
+
+# Windows...
+# source('2014 Staff Survey data cleanup.R')
+
+library('likert')
+library('RCurl')
+library('reshape')
+
+# Windows...
+#d <- getURL('https://gist.githubusercontent.com/atenni/39d8de95dfbae4d21cfc/raw/7177ccae1aa32c4489fd69ab433539c9b247f142/AC%202014%20Staff%20Survey.csv')
+#data <- read.csv(text=d)
+
+data <- read.csv('~/GitHub/ss2014/Sheet_1.csv')
+
+# Drop extra SurveyMonkey row
+data <- data[-1,]
+
+colnames(data) <- c(
+  "RespondentID",
+  "CollectorID",
+  "StartDate",
+  "EndDate",
+  "IP Address",
+  "Email Address",
+  "First Name",
+  "LastName",
+  "Custom Data",
+  "Do you work within Academia or Administration?",
+  "I think AC staff meetings are run well",
+  "Feedback: I think AC staff meetings are run well",
+  "I enjoy AC staff camps",
+  "Feedback: I enjoy AC staff camps",
+  "AC graduation and other public events are run well",
+  "Feedback: AC graduation and other public events are run well",
+  "I feel valued by my manager for the work I do",
+  "Feedback: I feel valued by my manager for the work I do",
+  "I feel valued by my peers for the work I do",
+  "Feedback: I feel valued by my peers for the work I do",
+  "I feel I have the skills to do the job I've been asked to do",
+  "Feedback: I feel I have the skills to do the job I've been asked to do",
+  "I have a clear understanding of the AC organisational structure",
+  "I feel I fit into the organisational culture of AC",
+  "Feedback: I feel I fit into the organisational culture of AC",
+  "I attend Chapel because I want to, not because I have to",
+  "Feedback: I attend Chapel because I want to, not because I have to",
+  "The mission and vision of the College has been clearly communicated to me",
+  "I consider my office area and staff facilities adequate in order to perform my duties",
+  "Feedback: I consider my office area and staff facilities adequate in order to perform my duties",
+  "How do you feel about: Alphacrucis (the organisation) now?",
+  "Feedback: How do you feel about: Alphacrucis (the organisation) now?",
+  "How do you feel about: Alphacrucis (the organisation) 2 years from now?",
+  "Feedback: How do you feel about: Alphacrucis (the organisation) 2 years from now?",
+  "How do you feel about: Working conditions at Alphacrucis now?",
+  "Feedback: How do you feel about: Working conditions at Alphacrucis now?",
+  "How do you feel about: Working conditions at Alphacrucis 2 years from now?",
+  "Feedback: How do you feel about: Working conditions at Alphacrucis 2 years from now?",
+  "How do you feel about communication between: You and your peers within your department?",
+  "Feedback: How do you feel about communication between: You and your peers within your department?",
+  "How do you feel about communication between: You and other departments?",
+  "Feedback: How do you feel about communication between: You and other departments?",
+  "How do you feel about communication between: You and your manager?",
+  "Feedback: How do you feel about communication between: You and your manager?",
+  "How do you feel about communication between: You and your direct reports (if appropriate)?",
+  "Feedback: How do you feel about communication between: You and your direct reports (if appropriate)?",
+  "I am likely to recommend AC as an employer of choice",
+  "Feedback: I am likely to recommend AC as an employer of choice",
+  "Assuming your current role and salary remain the same, what other factors would enhance your job satisfaction?",
+  "What causes you frustration in your specific role at AC?",
+  "What are the top three things you enjoy about your specific role at AC?",
+  "Identify three reasons why you choose to work at AC",
+  "Do you have any further comments on your employment experience at AC?")
+
+## CLEAN UP DATA ##
+# Select only quantitive data
+unnecessary_vars <- c(-1, -2, -4:-9, seq(-12, -22, -2), -25, -27,
+                      seq(-30,-46, -2), -48:-53)
+clean_data <- data[unnecessary_vars]
+
+# Format dates
+clean_data$StartDate <- as.Date(clean_data$StartDate, "%m/%d/%Y %H:%M:%S")
+
+# Create factors
+likert_vars <- c(3:13, 22)
+likert_labels <-c("Strongly Disagree", "Disagree", "Neutral", "Agree",
+                  "Strongly Agree")
+clean_data[likert_vars] <- lapply(clean_data[likert_vars], factor, levels=1:5,
+                                  labels=likert_labels)
+clean_data[2] <- lapply(clean_data[2], factor, levels=1:2,
+                        labels=c('Academia', 'Administration'))
+
+## CREATE LIKERT QUESTIONS ##
+ss2014_combined <- likert(clean_data[c(3:13, 22)])
+ss2014_split <- likert(clean_data[c(3:13, 22)], grouping=clean_data[[2]])
+
+
 ```
 
 - **Total number of respondents:** `r sum(table(clean_data[2]))`
