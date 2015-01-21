@@ -31,7 +31,7 @@ Any analysis of quantative data first needs to consider nature of the data itsel
 3. _Interval data._ Ordered data where distance measurment is possible, but where there is no true zero point (Example: temperature measured in Celcius. It doesn't make sense to say 20C is twice as hot as 10C)
 4. _Ratio data._ Ordered data with a true zero point, where both distance, and fractions of distance between variables are possible. (Example: absolute tempreture measured in Kelvin.)
 
-\marginnote{We know that Strongly Agree is more positive than Agree, but we don't know by how much. Additionally, we don't know that the distance between Strongly Agree and Agree is the same as the distance between Neutral and Disagree.} Of these categories, the data collected via our Likert questions is of the type *ordinal*. Most important for this discussion is that __descriptive statistics such as the *mean* and *standard deviation*, or any parametric analysis based on the normal distribution, are invalid parameters for ordinal data.__ The results obtained by these measures on ordinal data are statistically meaningless.
+Of these categories, the data collected via our Likert questions is of the type *ordinal*. \marginnote{It is of the type ordinal because, while we know that Strongly Agree is more positive than Agree, we don't know by how much. Additionally, we don't know that the distance between Strongly Agree and Agree is the same as the distance between Neutral and Disagree.} Most important for this discussion is that __descriptive statistics such as the *mean* and *standard deviation*, or any parametric analysis based on the normal distribution, are invalid parameters for ordinal data.__ The results obtained by these measures on ordinal data are statistically meaningless.
 
 Despite this being relatively uncontroversial in methodological[^blaikie2003] or statistical[^clegg2008] texts, it is somewhat surprising how frequently even published researchers break these rules[^jamieson2004]. Allen and Seaman propose that "An underlying reason for analyzing ordinal data as interval data might be the contention that parametric statistical tests (based on the central limit theorem) are more powerful than nonparametric alternatives. Also, conclusions and interpretations of parametric tests might be considered easier to interpret and provide more information than nonparametric alternatives. However, treating ordinal data as interval (or even ratio) data without examining the values of the dataset and the objectives of the analysis can both mislead and misrepresent the findings of a survey."[^allen2007]
 
@@ -140,7 +140,7 @@ xtable(q3_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=3, fig.width=5, fig.cap = "I think AC staff meetings are run well"}
+```{r, fig.height=3, fig.width=5, fig.cap = "Frequency table visualisation for \"I think AC staff meetings are run well\""}
 q3_lkt <- likert(lkt[3], grouping = lkt[,2]) # Group q3 responses by staff type
 plot(q3_lkt, text.size=3, include.histogram=TRUE,
      group.order=c('All staff', 'Academia', 'Administration'))
@@ -176,7 +176,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I enjoy AC staff camps\"", echo=FALSE}
 q <- 4
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -210,7 +210,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"AC graduation and other public events are run well\"", echo=FALSE}
 q <- 5
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -244,7 +244,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I feel valued by my manager for the work I do\"", echo=FALSE}
 q <- 6
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -278,7 +278,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I feel valued by my peers for the work I do\"", echo=FALSE}
 q <- 7
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -312,7 +312,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I feel I have the skills to do the job I've been asked to do\"", echo=FALSE}
 q <- 8
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -346,7 +346,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I have a clear understanding of the AC organisational structure\"", echo=FALSE}
 q <- 9
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -370,7 +370,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I feel I fit into the organisational culture of AC\"", echo=FALSE}
 q <- 10
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -404,7 +404,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I attend Chapel because I want to, not because I have to\"", echo=FALSE}
 q <- 11
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -438,7 +438,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"The mission and vision of the College has been clearly communicated to me\"", echo=FALSE}
 q <- 12
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -462,7 +462,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I consider my office area and staff facilities adequate in order to perform my duties\"", echo=FALSE}
 q <- 13
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
@@ -496,7 +496,7 @@ xtable(q_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "FIX ME", echo=FALSE}
+```{r, fig.height=2.5, fig.width=10, fig.fullwidth=TRUE, fig.cap = "Frequency table visualisation for \"I am likely to recommend AC as an employer of choice\"", echo=FALSE}
 q <- 14
 q_lkt <- likert(lkt[q], grouping = lkt[,2]) # Group q responses by staff type
 plot(q_lkt, text.size=3, include.histogram=TRUE,
