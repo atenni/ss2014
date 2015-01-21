@@ -57,7 +57,7 @@ The primary method for sumarising our Likert data will be via frequency tables. 
 
 \newpage
 
-# Results
+# Results: Likert questions
 
 ```{r, include=FALSE}
 library(xtable)
@@ -140,20 +140,23 @@ xtable(q3_summary, digits=0,
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
 
-```{r, fig.height=3, fig.width=5, fig.cap = "Frequency table visualisation for \"I think AC staff meetings are run well\""}
+```{r, fig.height=2.5, fig.width=10, fig.cap = "Frequency table visualisation for \"I think AC staff meetings are run well\""}
 q3_lkt <- likert(lkt[3], grouping = lkt[,2]) # Group q3 responses by staff type
-plot(q3_lkt, text.size=3, include.histogram=TRUE,
+plot(q3_lkt, text.size=4, include.histogram=TRUE,
      group.order=c('All staff', 'Academia', 'Administration'))
 ```
 
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     Well spaced out, good amount of info communicated, chance for connecting & reflecting
+ Academia        Agree     Well spaced out, good amount of info communicated,
+                           chance for connecting & reflecting
  
-                 Disagree  Boring, lack of opportunities to ask questions of leadership, repetitive info
+                 Disagree  Boring, lack of opportunities to ask questions of
+                           leadership, repetitive info
 
- Administration  Agree     Informative, fun, good to align goals, good to hear departmental updates
+ Administration  Agree     Informative, fun, good to align goals, good to hear
+                           departmental updates
  
                  Disagree  One-way communication, staff input is not solicited
 -------------------------------------------------------------------------------
@@ -186,11 +189,15 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     Opportunity to regenerate sense of community, good speakers, chance to meet staff you don’t usually meet, preparation for the year together
+ Academia        Agree     Opportunity to regenerate sense of community, good
+                           speakers, chance to meet staff you don’t usually
+                           meet, preparation for the year together
  
                  Disagree  N/A (No one disagreed!)
 
- Administration  Agree     Aligning of goals/vision, team bonding without distractions, inspirational, well-run, off-site is enjoyable
+ Administration  Agree     Aligning of goals/vision, team bonding without
+                           distractions, inspirational, well-run, off-site is
+                           enjoyable
  
                  Disagree  Too much of self-cheering
 -------------------------------------------------------------------------------
@@ -516,9 +523,145 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
 
 
+\newpage
+
+# Results: Other quantative questions
 
 
+\newpage
 
+# Results: Open response questions
+
+## Assuming your current salary remains the same, what other factors would enhance your job satisfaction?
+
+\newthought{There were some common themes} reported by both Academic and Administrative staff for this question. These can be summarised as follows:
+
+-------------------------------------------------------------------------------
+Academia                                      Administration
+--------------------------------------------  ---------------------------------
+Bonuses                                       Bonuses
+
+Flexibility in time/location                  Freedom with time management
+
+Regular/positive feedback from manager        Regular/positive feedback from manager
+
+Autonomy                                      Autonomy
+-------------------------------------------------------------------------------
+
+Table: Common themes expressed by Academic and Administrative staff.
+
+
+Other items identified by __Academia__ include the following:
+
+- Ongoing training
+- Understanding and value of academic expertise
+- Team lunches/activities
+- Effective marketing
+- Better faculty support
+- Organisational culture supportive of freedom of choice
+- More incentives to do well
+
+
+Other items identified by __Administration__ include the following:
+
+- Promotion opportunities
+- More staff to share workload
+- Indoor plants 
+- Pastoral care
+- Clearer job parameters 
+- Not being forced to take annual leave during Christmas break 
+- Small rewards
+
+
+\newpage
+
+## What causes you frustration in your specific role at AC?
+
+\newthought{Common themes expressed} by all staff inlcude: (i) workload, (ii) being
+given responsibility without authority, and (iii) (lack of) resources.
+
+Other, less thematic frustrations identified by __Academia__ include the following:
+
+- Work overload
+- Non-engaging students
+- Poor or delayed communication
+- Isolation between campuses
+- Compliance
+- Workload calculator isn’t comprehensive
+- Seeing good people leave
+- Lack of accountability/management
+- Being given responsibility without authority
+- Criticism/miscommunication
+- Inefficiencies in other departments
+- Inconsistencies between organisational values and behaviour
+- Lack of uninterrupted time
+- Lack of time/resources for research
+
+Other, less thematic frustrations identified by __Administration__ include the following:
+
+- Less opportunities for upward promotion
+- Lack of time for prayer
+- Lack of interest in listening to suggestions for improvement
+- Increased workload due to others’ interference
+- Lack of clear KPIs
+- Lack of authority to make decisions that affect one’s role
+- Lack of consistency in the way people/churches are treated (i.e. some given special treatment)
+- Inconsistencies in staff commitment to college
+- Unenforced rules (for students)
+- Lack of resources
+- Lack of vision and strategic planning
+- Allocation of tasks without information needed to complete them
+- Sudden heavy increase in workload without warning
+- Staff not communicating their whereabouts
+
+
+\newpage
+
+## What are the top three things you enjoy about your specific role at AC?
+
+\newthought{The top three things enjoyed} by both Academic and Administrative staff
+shared a high degree of similarity. In no particular order they are as follows:
+
+-------------------------------------------------------------------------------
+Academia                                      Administration
+--------------------------------------------  ---------------------------------
+People                                        People
+
+Purpose                                       Purpose
+
+Variety/challenges                            Environment (facilities, support, team, etc.)
+-------------------------------------------------------------------------------
+
+Table: Top three things enjoyed by Academia and Administration.
+
+
+\newpage
+
+
+## Identify three reasons why you choose to work at AC?
+
+\newthought{Likewise, there was a large degree of similarity} between Academia and
+Administration when asked to identify reasons for continuing to choose to work at AC.
+
+-------------------------------------------------------------------------------
+Academia                                      Administration
+--------------------------------------------  ---------------------------------
+Christian/Pentecostal ethos                   Christian environment
+
+Sense of calling                              College’s vision
+
+Job fit (sense of contribution,               Environment (support, opportunities,
+match with skills, etc.)                      contribution, etc.)
+-------------------------------------------------------------------------------
+
+Table: Main reasons Academic and Administrative staff choos to work at AC.
+
+
+\newpage
+
+# Summary
+
+[TODO]
 
 
 
