@@ -135,7 +135,7 @@ Frequency table of responses to the first question, grouped by staff type:
 q3_summary <- table(lkt[,2], lkt[,3]) # Create frequency counts for q3 grouped by staff type
 q3_summary <- addmargins(q3_summary, margin=2) # Add in row totals
 xtable(q3_summary, digits=0,
-       caption='Frequency count: "I think staff meetings are run well"')
+       caption='Frequency table for \"I think staff meetings are run well\"')
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -171,7 +171,7 @@ q <- 4
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -205,7 +205,7 @@ q <- 5
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -239,7 +239,7 @@ q <- 6
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -273,7 +273,7 @@ q <- 7
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -307,7 +307,7 @@ q <- 8
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -341,7 +341,7 @@ q <- 9
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -365,7 +365,7 @@ q <- 10
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -399,7 +399,7 @@ q <- 11
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -433,7 +433,7 @@ q <- 12
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -457,7 +457,7 @@ q <- 13
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
@@ -491,7 +491,7 @@ q <- 14
 q_summary <- table(lkt[,2], lkt[,q]) # Create frequency counts for q grouped by staff type
 q_summary <- addmargins(q_summary, margin=2) # Add in row totals
 xtable(q_summary, digits=0,
-       caption=paste('Frequency count: ', names(lkt[q])) )
+       caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
 And the corresponding visualisation of the proportional frequency count, by staff type:
