@@ -186,13 +186,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Opportunity to regenerate sense of community, good speakers, chance to meet staff you don’t usually meet, preparation for the year together
  
-                 Disagree  
+                 Disagree  N/A (No one disagreed!)
 
- Administration  Agree     
+ Administration  Agree     Aligning of goals/vision, team bonding without distractions, inspirational, well-run, off-site is enjoyable
  
-                 Disagree  
+                 Disagree  Too much of self-cheering
 -------------------------------------------------------------------------------
 
 
@@ -220,13 +220,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Gets better each year, professional yet warm & inviting, improvements reflects growing confidence in our academic standing
  
-                 Disagree  
+                 Disagree  N/A (No one disagreed!)
 
- Administration  Agree     
+ Administration  Agree     Community-minded, clear info, great vibe from students, staff & visitors
  
-                 Disagree  
+                 Disagree  Staff being asked to volunteer without pay
 -------------------------------------------------------------------------------
 
 
@@ -254,13 +254,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Good communication, positive feedback
  
-                 Disagree  
+                 Disagree  (No qualitative response provided)
 
- Administration  Agree     
+ Administration  Agree     Respect, verbal appreciation, feedback, autonomy, affirmation, trust/confidence given, approachability, ownership of tasks
  
-                 Disagree  
+                 Disagree  No recognition of extra work done, lack of feedback/affirmation, pay doesn’t reflect value
 -------------------------------------------------------------------------------
 
 
@@ -288,13 +288,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Good camaraderie, team feeling & empathy
  
-                 Disagree  
+                 Disagree  N/A (No one disagreed!)
 
- Administration  Agree     
+ Administration  Agree     (Peers) generous, helpful, take time to socialise, provide encouragement/affirmation
  
-                 Disagree  
+                 Disagree  (Peers) don’t understand the work done by me; make decisions that make my work harder without consulting me
 -------------------------------------------------------------------------------
 
 
@@ -322,13 +322,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Yes, but always something new to learn
  
-                 Disagree  
+                 Disagree  N/A (No one disagreed!)
 
- Administration  Agree     
+ Administration  Agree     “Jobs are getting done,” “I’m just good!”
  
-                 Disagree  
+                 Disagree  Role unclear; feel out of my depth
 -------------------------------------------------------------------------------
 
 
@@ -353,17 +353,7 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
      group.order=c('All staff', 'Academia', 'Administration'))
 ```
 
--------------------------------------------------------------------------------
-  Who             What     Why
----------------  --------  ----------------------------------------------------
- Academia        Agree     
- 
-                 Disagree  
-
- Administration  Agree     
- 
-                 Disagree  
--------------------------------------------------------------------------------
+No qualitative response was asked for this question.
 
 
 \newpage
@@ -390,13 +380,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Understand the aims of the organisations, teamwork, culture, vision, “time for tea”, pioneering
  
-                 Disagree  
+                 Disagree  N/A (No one disagreed!)
 
- Administration  Agree     
+ Administration  Agree     Christian/Pentecostal values, sense of being part of bigger purpose, sense of belonging
  
-                 Disagree  
+                 Disagree  Feel excluded by decisions made without consultation
 -------------------------------------------------------------------------------
 
 
@@ -424,13 +414,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Most times, but not always
  
-                 Disagree  
+                 Disagree  Frustrating when speakers contradict what we teach, compulsory chapel is contradiction of Christian freedom
 
- Administration  Agree     
+ Administration  Agree     Worship, fellowship, community
  
-                 Disagree  
+                 Disagree  (No qualitative response provided)
 -------------------------------------------------------------------------------
 
 
@@ -455,17 +445,7 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
      group.order=c('All staff', 'Academia', 'Administration'))
 ```
 
--------------------------------------------------------------------------------
-  Who             What     Why
----------------  --------  ----------------------------------------------------
- Academia        Agree     
- 
-                 Disagree  
-
- Administration  Agree     
- 
-                 Disagree  
--------------------------------------------------------------------------------
+No qualitative response was asked for this question.
 
 
 \newpage
@@ -492,13 +472,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Having an office makes job easier
  
-                 Disagree  
+                 Disagree  Cubicles not conducive for the type of work (e.g. Marking)
 
- Administration  Agree     
+ Administration  Agree     Safe, clean, good IT support 
  
-                 Disagree  
+                 Disagree  Cramped, cubicle not conducive for creative work, noise, lack of privacy for confidential phone conversations
 -------------------------------------------------------------------------------
 
 
@@ -526,13 +506,13 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     
+ Academia        Agree     Encouraging culture, good ethos
  
-                 Disagree  
+                 Disagree  Salary
 
- Administration  Agree     
+ Administration  Agree     Good people, environment, vision, recognition of skills
  
-                 Disagree  
+                 Disagree  Lack of long-term career management; low salary
 -------------------------------------------------------------------------------
 
 
@@ -551,6 +531,8 @@ plot(q_lkt, text.size=3, include.histogram=TRUE,
 - Correlations
 - Time of response predictive of sentiment
 
+
+\newpage
 
 # Appendix 1: 
 
