@@ -143,7 +143,7 @@ other rather than overlaying them. This would be difficult to interprete visuall
 
 \newpage
 
-## I think AC staff meetings are run well
+## Question 1: I think AC staff meetings are run well
 
 For this first question we will "show our working" by displaying the underlying R commands used to create the summary table and plot. The commands only differ slightly between questions, so in the interests of brevity we will only present the results for the remaining questions.
 
@@ -183,7 +183,7 @@ plot(q3_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## Question 1: I enjoy AC staff camps
+## Question 2: I enjoy AC staff camps
 
 Frequency table of responses to the first question, grouped by staff type:
 
@@ -223,7 +223,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## AC graduation and other public events are run well
+## Question 3: AC graduation and other public events are run well
 
 ```{r, results='asis', echo=FALSE}
 q <- 5
@@ -257,7 +257,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## I feel valued by my manager for the work I do
+## Question 4: I feel valued by my manager for the work I do
 
 ```{r, results='asis', echo=FALSE}
 q <- 6
@@ -291,7 +291,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## I feel valued by my peers for the work I do
+## Question 5: I feel valued by my peers for the work I do
 
 ```{r, results='asis', echo=FALSE}
 q <- 7
@@ -325,7 +325,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## I feel I have the skills to do the job I've been asked to do
+## Question 6: I feel I have the skills to do the job I've been asked to do
 
 ```{r, results='asis', echo=FALSE}
 q <- 8
@@ -359,7 +359,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## I have a clear understanding of the AC organisational structure
+## Question 7: I have a clear understanding of the AC organisational structure
 
 ```{r, results='asis', echo=FALSE}
 q <- 9
@@ -383,7 +383,7 @@ No qualitative response was asked for this question.
 
 \newpage
 
-## I feel I fit into the organisational culture of AC
+## Question 8: I feel I fit into the organisational culture of AC
 
 ```{r, results='asis', echo=FALSE}
 q <- 10
@@ -417,7 +417,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## I attend Chapel because I want to, not because I have to
+## Question 9: I attend Chapel because I want to, not because I have to
 
 ```{r, results='asis', echo=FALSE}
 q <- 11
@@ -451,7 +451,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## The mission and vision of the College has been clearly communicated to me
+## Question 10: The mission and vision of the College has been clearly communicated to me
 
 ```{r, results='asis', echo=FALSE}
 q <- 12
@@ -475,7 +475,7 @@ No qualitative response was asked for this question.
 
 \newpage
 
-## I consider my office area and staff facilities adequate in order to perform my duties
+## Question 12: I consider my office area and staff facilities adequate in order to perform my duties
 
 ```{r, results='asis', echo=FALSE}
 q <- 13
@@ -509,7 +509,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 
 \newpage
 
-## I am likely to recommend AC as an employer of choice
+## Question 13: I am likely to recommend AC as an employer of choice
 
 ```{r, results='asis', echo=FALSE}
 q <- 14
