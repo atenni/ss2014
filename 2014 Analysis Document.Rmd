@@ -5,6 +5,8 @@ date: "January 15th, 2015"
 output: rmarkdown::tufte_handout
 ---
 
+--------
+
 # 2014 Staff Survey
 
 \newthought{In keeping with our normal practice,} we present the detailed analysis of this years Alphacrucis Staff Survey.
@@ -12,7 +14,7 @@ output: rmarkdown::tufte_handout
 This document complements the high level overview presentation provided to all staff at the annual staff retreat.
 It is intended to go into further detail on each question, expand upon methodologies used and document the assumptions we have made.
 
-As in previous years - and in the spirit of open information, transparency and reproducible research - the quantitative dataset has been made available for further analysis. \marginnote{This copy of the dataset, along with the original version, remain anonymised. The only difference between the two datasets is that we don't include the qualitiative data in this copy, as we feel it has the potential to be *more* identifiable.} We encourage individuals to perform their own analysis, particularly if their assumptions differ from ours, and present their findings to us all. To make this even easier, this PDF has been generated from a document written in *R Markdown* format, allowing the researcher to run all our computations on their own computer, and adjust them as they see fit.
+As in previous years - and in the spirit of open information, transparency and reproducible research - the quantitative dataset has been made available for further analysis. \marginnote{This copy of the dataset, along with the original version, remain anonymised. The only difference between the two datasets is that we don't include the qualitiative data in this copy, as we feel it has the potential to be \emph{more} identifiable.} We encourage individuals to perform their own analysis, particularly if their assumptions differ from ours, and present their findings to us all. To make this even easier, this PDF has been generated from a document written in *R Markdown* format, allowing the researcher to run all our computations on their own computer, and adjust them as they see fit.
 
 
 ## Objectives of this analysis
@@ -26,54 +28,51 @@ We feel this data provides a rich area for exploration, and towards the end of
 this document have listed areas we would be personally interested in seeing
 our colleagues examine further.
 
-**This is, however, a primarily _qualitative_ study.** Although we collect quantitative data, its primary use is to categorise the qualitative feedback received. Secondary to this is it's use as a broad, high level overview of the survey to provide a context for the textual analysis to exist in. As such we do not report any summary statistics, such as means, nor compare this data year-on-year. Rather, we simply present the number of reponses for each question in a frequency table.
+**This remains, however, a primarily _qualitative_ study.** Although we collect quantitative data, its primary use is to categorise the qualitative feedback received. Secondary to this is it's use as a broad, high level overview of the survey to provide a context for the textual analysis to exist in. As such we do not report any summary statistics, such as means, nor compare this data year-on-year. Rather, we simply present the number of reponses for each question within a frequency table, and provide a simple visualisation of this table.
 
-# Methodology: Data collection
+# Methodology: data collection
 
 This survey takes the form of an anonymous, optional survey for all employees
 of Alphacrucis College. A link to an online form is emailed to staff in
-December, and reponses are collected up until min Janurary. Within this period
+December, and reponses are collected up until mid Janurary. Within this period
 reminder emails are sent to staff in order to maximise the response rate.
 
 This year we received `r  nrow(lkt[(lkt[,2] == 'All staff'),])` responses from
-~80 employees. While we don't have employee numbers for corresponding periods in
+~80 employees. Whilst we don't have employee numbers for corresponding periods in
 previous years, this almost certainly represents the highest response rate
-received yet.
-
-As our sample size approaches our population size, we become more confident that
+received for this survey yet. As our sample size approaches our population size, we become more confident that
 our results are representive of AC staff. Of course, this remains a sample and
 thus an estimate, so we can not be certain, just less uncertain.
 
 We don't feel that sampling techniques such as stratified or cluster sampling would add
 considerably to the representativness of this data, given that our sample
-represents close to 75% of the population. 
+represents close to 75% of the population. However, something that *would*
+increase the representativeness of our sample is a test for non-response bias.
+We are open to ideas on how best this could be done, whilst maintaining the
+annonymity of the survey.
 
-Something that *would* increase the representativeness of our sample is a test
-for non-response bias. We are open to ideas on how best this could be done, whilst
-maintaining the annonymity of the survey.
 
+# Methodology: quantative data analysis
 
-# Methodology: quantative data
-
-Any analysis of quantative data first needs to consider the nature of the data itself in order to draw statistically valid conclusions from it. Stanley Smith Stevens'[^sss1946] *Theory of Scales of Measurment* proposes a heirarchy of four levels:
+Any analysis of quantative data first needs to consider the nature of the data itself in order to draw statistically valid conclusions from it. Stanley Smith Stevens' *Theory of Scales of Measurment*[^sss1946] proposes a heirarchy of four levels:
 
 1. _Nominal data._ Unordered categorical data. (Example: Female, Male)
-2. _Ordinal data._ Ordered data, but with no measure of distance (Example: ranking fruit by colour - Very Orange, Pale Orange)
+2. _Ordinal data._ Ordered data, but with no measure of distance (Example: ranking fruit by colour - Very Orange, Orange, Pale Orange)
 3. _Interval data._ Ordered data where distance measurment is possible, but where there is no true zero point (Example: temperature measured in Celcius. It doesn't make sense to say 20C is twice as hot as 10C)
 4. _Ratio data._ Ordered data with a true zero point, where both distance, and fractions of distance between variables are possible. (Example: absolute tempreture measured in Kelvin.)
 
 Of these categories, the data collected via our Likert questions is of the type *ordinal*. \marginnote{It is of the type ordinal because, whilst we know that Strongly Agree is more positive than Agree, we don't know by how much. Additionally, we don't know that the distance between Strongly Agree and Agree is the same as the distance between Neutral and Disagree.} Most important for this discussion is that __descriptive statistics such as the *mean* and *standard deviation*, or any parametric analysis based on the normal distribution, are invalid parameters for ordinal data.__
 
-Despite this being relatively uncontroversial in methodological[^blaikie2003] or statistical[^clegg2008] texts, it is somewhat surprising how frequently even published researchers break these rules[^jamieson2004] and treat ordinal data as interval data. Allen and Seaman propose that "an underlying reason for analyzing ordinal data as interval data might be the contention that parametric statistical tests (based on the central limit theorem) are more powerful than nonparametric alternatives. Also, conclusions and interpretations of parametric tests might be considered easier to interpret and provide more information than nonparametric alternatives. However, treating ordinal data as interval (or even ratio) data without examining the values of the dataset and the objectives of the analysis can both mislead and misrepresent the findings of a survey."[^allen2007]
+Whilst this is relatively uncontroversial in methodological[^blaikie2003] or statistical[^clegg2008] texts, it is somewhat surprising how frequently even published researchers break these rules[^jamieson2004] and treat ordinal data as interval data. Allen and Seaman propose that "an underlying reason for analyzing ordinal data as interval data might be the contention that parametric statistical tests (based on the central limit theorem) are more powerful than nonparametric alternatives. Also, conclusions and interpretations of parametric tests might be considered easier to interpret and provide more information than nonparametric alternatives. However, treating ordinal data as interval (or even ratio) data without examining the values of the dataset and the objectives of the analysis can both mislead and misrepresent the findings of a survey."[^allen2007]
 
 It is our opinion then, that for the data collected via our Likert responses appropriate non-parametric statistical measures for centrality include the mode and median, and for the spread of the distrubutions, the interquartile ranges. Other valid measures may include the use of Kruskall-Wallis models for measures of variance, Chi-Squared and Fisher exact tests for measures for significance, and simple distribution free methods such as tabulations and frequency counts.
 
-Given the earlier statement that ours is primarily a qualitative analysis, we will adopt a conservative approach and restrict our quantitative attention to tabulations and frequency counts. Where we group responses into Academic and Administrative categories, it is to contextualise discussion about the textual responses, and we do not offer an opinion on whether one group is more- or less-positive than the other. \marginnote{In light of discussions at Staff Retreat we will, however, propose that Fisher's exact test (with the extension to matricies greater than 2x2 offered by Freeman-Halton) provide a statistically rigourous starting point for any analysis into the differences between these two groups. This will be discussed more in the *Areas for further study* section, and we will provide P-values for tests of non-random associations between Academic and Administrative responses in the Appendix as a motivating example.}
+Given the earlier statement that ours is primarily a qualitative analysis, we will adopt a conservative approach and restrict our quantitative attention to tabulations and frequency counts. \marginnote{In light of discussions at Staff Retreat we will, however, propose that Fisher's exact test (with the extension to matricies greater than 2x2 offered by Freeman-Halton) provide a statistically rigourous starting point for any analysis into the differences between these two groups. This will be discussed more in the *Areas for further study* section, and we will provide P-values for tests of non-random associations between Academic and Administrative responses in the Appendix as a motivating example.} Where we group responses into Academic and Administrative categories, it is to contextualise discussion about the textual responses, and we do not offer an opinion on whether one group is more- or less-positive than the other. 
 
 
 # Methodology: Visualisations
 
-The primary method for sumarising our Likert data will be via frequency tables. This will be visualised via *Diverging Stacked Bar Charts*. Robbins and Heiberger[^robbins2013] provide an excellent discussion on the benefits of this approach in *Design of Diverging Stacked Bar Charts for Likert Scales and Other Applications*.
+The primary method for sumarising our Likert data will be via frequency tables. This will be visualised via use of *diverging stacked bar charts*. Robbins and Heiberger[^robbins2013] provide an excellent discussion on the benefits of this approach in *Design of Diverging Stacked Bar Charts for Likert Scales and Other Applications*.
 
 # Methodology: Thematic analysis
 
@@ -130,7 +129,7 @@ options(xtable.comment = FALSE)
 options(xtable.booktabs = TRUE)
 ```
 
-\newthought{With the caveats mentioned above in mind,} we present a brief high level overview of the data to provide a context for the qualitative analysis in the next section. In these initial sections we will also print the R commands used to generate the data for the purposes of transparency. As mentioned earlier, the R commands for this whole report can be seen in the  associated R Markdown file used to create this PDF.
+\newthought{With the caveats mentioned above in mind,} we present a brief high level overview of the data in order to provide a context for the qualitative analysis in the next section. In these initial sections we will also print the R commands used to generate the data for the purposes of transparency. As mentioned earlier, the R commands for this whole report can be seen in the  associated *R Markdown* file used to generate this PDF.
 
 ```{r, fig.height=8, fig.width=10, fig.fullwidth=TRUE, fig.caption="Normalised frequency counts for all responses, ordered from the highest number of Agree/Strongly Agree responses to the least. Includes response rates (n) for each question."}
 all_staff <- lkt[,2] == "All staff"
@@ -138,9 +137,15 @@ plot(likert(lkt[all_staff, 3:14]), text.size=4, plot.percent.neutral=FALSE,
      include.histogram = TRUE, wrap=30)
 ```
 
-As can be seen in the right hand column, the response rates for each question remain $\ge$ 55 as indicated in grey, with the number of people not providing an answer indicated in red. (Presumably the higher non-response rate for "I enjoy AC staff camps" is due to the number of new staff hired over the year who have not yet attend a staff camp.)
+As can be seen in the right hand column, the response rates for each question remain $\ge$ 55 as indicated in grey, with the number of people not providing an answer indicated in red. \marginnote{Presumably the higher non-response rate for "I enjoy AC staff camps" is due to the number of new staff hired over the year who had not yet attended a staff camp.}
 
-For this next plot we have overlayed the responses received for each question in order to get a
+We are primarily interested in the number of people who either agree with the statement (ie. Agree, or Strongly Agree), or disagree with the statement (ie. Disagree, or Strongly Disagree). This is indicated by the percentage figures to the left and right of the bars. We do not include percentages for neutral responses, but these can be computed by simply subtracting the displayed percentages from 100%.
+
+How these responses break down into Agree/Strongly Agree and Disagree/Strongly Disagree is displayed in the bar chart, but is of less interest to us in this report.
+
+--------
+
+For this next plot we have overlayed the responses received for each question in an attempt to get a
 broad sense of the overall sentiment of respondents.
 
 ```{r, fig.height=8, fig.width=10, fig.fullwidth=TRUE, fig.caption="TO DO"}
@@ -149,10 +154,11 @@ plot(likert(lkt[all_staff, 3:14]), type='density', facet=FALSE) + theme(legend.p
 ```
 
 We recommend against reading too much into this plot, and suggest that its primary usefullness is
-as an initial step in exploring the data. Its primary limitations stem from the
-assumptions this plot makes.
+as an initial step in exploring the data.
 
-In order to plot discrete data points on a continuous scale, we need to interpolate between data points.
+The primary limitations of this plot stem from the
+assumptions the plot makes. In order to plot discrete data points on a
+continuous scale, we need to interpolate between data points.
 We achieve this via a KDE, \marginnote{KDE: Kernal Density Estimator} which requires parrameters such as the
 smoothing kernel to be used (_gaussian_ in our case), and the amount of smoothing bandwidth, or
 standard deviation, to use to scale the smoothing kernel[^sheather1991]. This, however, violates our
@@ -169,7 +175,7 @@ other rather than overlaying them. This would be very difficult to interprete vi
 
 ## Question 1: I think AC staff meetings are run well
 
-For this first question we will "show our working" by displaying the underlying R commands used to create the summary table and plot. The commands only differ slightly between questions, so in the interests of brevity we will only present the results for the remaining questions.
+For this first question we will *show our working* by displaying the underlying R commands used to create the summary table and plot. The commands only differ slightly between questions, so in the interests of brevity we will only present the results for the remaining questions.
 
 Frequency table of responses to the first question, grouped by staff type:
 
@@ -203,6 +209,7 @@ plot(q3_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  One-way communication, staff input is not solicited
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 
 \newpage
@@ -244,6 +251,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  Too much of self-cheering
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
@@ -269,15 +277,18 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
 -------------------------------------------------------------------------------
   Who             What     Why
 ---------------  --------  ----------------------------------------------------
- Academia        Agree     Gets better each year, professional yet warm & inviting, improvements reflects growing confidence in our academic standing
+ Academia        Agree     Gets better each year, professional yet warm &
+                           inviting, improvements reflects growing confidence
+                           in our academic standing
  
-                 Disagree  N/A (No one disagreed!)
+                 Disagree  (No qualitative response provided)
 
  Administration  Agree     Community-minded, clear info, great vibe from students, staff & visitors
  
                  Disagree  Staff being asked to volunteer without pay
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
@@ -312,6 +323,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  No recognition of extra work done, lack of feedback/affirmation, pay doesn’t reflect value
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
@@ -346,6 +358,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  (Peers) don’t understand the work done by me; make decisions that make my work harder without consulting me
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
@@ -380,6 +393,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  Role unclear; feel out of my depth
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
@@ -438,6 +452,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  Feel excluded by decisions made without consultation
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
@@ -472,6 +487,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  (No qualitative response provided)
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
@@ -530,6 +546,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  Cramped, cubicle not conducive for creative work, noise, lack of privacy for confidential phone conversations
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
@@ -564,6 +581,7 @@ plot(q_lkt, text.size=4, include.histogram=TRUE, plot.percent.neutral=FALSE,
                  Disagree  Lack of long-term career management; low salary
 -------------------------------------------------------------------------------
 
+Table: Thematic annalysis of qualitative responses, grouped by staff type and response type.
 
 \newpage
 
