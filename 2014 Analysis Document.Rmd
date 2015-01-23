@@ -17,30 +17,58 @@ As in previous years - and in the spirit of open information, transparency and r
 
 ## Objectives of this analysis
 
-\newthought{In presenting the annual staff survey,} our objective is to convey the core themes of the data collected from staff, to staff, in a manner accessible to all staff. Note that this is not a statement about data accuracy, which it goes without saying should remain as high as possible at all times, but one of the scope of our analysis. There are many areas our analysis could have taken us, but we only persue those within the scope of our brief. This is not to say that analysis outside this scope is not interesting to us - we feel it provides a rich area of exploration and towards the end of this document have listed areas we would like to see our colleagues lend their skills to examining.
+\newthought{In presenting the annual staff survey,} our objective is to convey the core themes of the data collected from staff, to staff, in a manner accessible to all staff.
 
-**This is primarily a _qualitative_ study.** Although we collect quantitative data, its primary use is to categorise the qualitative feedback received. Secondary to this is it's use as a broad, high level overview of the survey to provide a context for the textual analysis to exist in. As such we do not report any summary statistics, such as means, but simply present the number of reponses for each question in a frequency table.
+Note that this is not a statement about data accuracy, which it goes without saying should remain as high as possible at all times, but one of the scope of our analysis. There are many areas our analysis could have taken us, but we only persue those within the scope of our brief.
+
+Also, this is not to say that analysis outside this scope is not interesting to us.
+We feel this data provides a rich area for exploration, and towards the end of
+this document have listed areas we would be personally interested in seeing
+our colleagues examine further.
+
+**This is, however, a primarily _qualitative_ study.** Although we collect quantitative data, its primary use is to categorise the qualitative feedback received. Secondary to this is it's use as a broad, high level overview of the survey to provide a context for the textual analysis to exist in. As such we do not report any summary statistics, such as means, nor compare this data year-on-year. Rather, we simply present the number of reponses for each question in a frequency table.
 
 # Methodology: Data collection
 
+This survey takes the form of an anonymous, optional survey for all employees
+of Alphacrucis College. A link to an online form is emailed to staff in
+December, and reponses are collected up until min Janurary. Within this period
+reminder emails are sent to staff in order to maximise the response rate.
+
+This year we received `r  nrow(lkt[(lkt[,2] == 'All staff'),])` responses from
+~80 employees. While we don't have employee numbers for corresponding periods in
+previous years, this almost certainly represents the highest response rate
+received yet.
+
+As our sample size approaches our population size, we become more confident that
+our results are representive of AC staff. Of course, this remains a sample and
+thus an estimate, so we can not be certain, just less uncertain.
+
+We don't feel that sampling techniques such as stratified or cluster sampling would add
+considerably to the representativness of this data, given that our sample
+represents close to 75% of the population. 
+
+Something that *would* increase the representativeness of our sample is a test
+for non-response bias. We are open to ideas on how best this could be done, whilst
+maintaining the annonymity of the survey.
 
 
 # Methodology: quantative data
 
-Any analysis of quantative data first needs to consider nature of the data itself in order to draw statistically valid conclusionsfrom it. Stanley Smith Stevens'[^sss1946] *Theory of Scales of Measurment* proposes a heirarchy of four levels:
+Any analysis of quantative data first needs to consider the nature of the data itself in order to draw statistically valid conclusions from it. Stanley Smith Stevens'[^sss1946] *Theory of Scales of Measurment* proposes a heirarchy of four levels:
 
 1. _Nominal data._ Unordered categorical data. (Example: Female, Male)
 2. _Ordinal data._ Ordered data, but with no measure of distance (Example: ranking fruit by colour - Very Orange, Pale Orange)
 3. _Interval data._ Ordered data where distance measurment is possible, but where there is no true zero point (Example: temperature measured in Celcius. It doesn't make sense to say 20C is twice as hot as 10C)
 4. _Ratio data._ Ordered data with a true zero point, where both distance, and fractions of distance between variables are possible. (Example: absolute tempreture measured in Kelvin.)
 
-Of these categories, the data collected via our Likert questions is of the type *ordinal*. \marginnote{It is of the type ordinal because, while we know that Strongly Agree is more positive than Agree, we don't know by how much. Additionally, we don't know that the distance between Strongly Agree and Agree is the same as the distance between Neutral and Disagree.} Most important for this discussion is that __descriptive statistics such as the *mean* and *standard deviation*, or any parametric analysis based on the normal distribution, are invalid parameters for ordinal data.__ The results obtained by these measures on ordinal data are statistically meaningless.
+Of these categories, the data collected via our Likert questions is of the type *ordinal*. \marginnote{It is of the type ordinal because, whilst we know that Strongly Agree is more positive than Agree, we don't know by how much. Additionally, we don't know that the distance between Strongly Agree and Agree is the same as the distance between Neutral and Disagree.} Most important for this discussion is that __descriptive statistics such as the *mean* and *standard deviation*, or any parametric analysis based on the normal distribution, are invalid parameters for ordinal data.__
 
-Despite this being relatively uncontroversial in methodological[^blaikie2003] or statistical[^clegg2008] texts, it is somewhat surprising how frequently even published researchers break these rules[^jamieson2004]. Allen and Seaman propose that "An underlying reason for analyzing ordinal data as interval data might be the contention that parametric statistical tests (based on the central limit theorem) are more powerful than nonparametric alternatives. Also, conclusions and interpretations of parametric tests might be considered easier to interpret and provide more information than nonparametric alternatives. However, treating ordinal data as interval (or even ratio) data without examining the values of the dataset and the objectives of the analysis can both mislead and misrepresent the findings of a survey."[^allen2007]
+Despite this being relatively uncontroversial in methodological[^blaikie2003] or statistical[^clegg2008] texts, it is somewhat surprising how frequently even published researchers break these rules[^jamieson2004] and treat ordinal data as interval data. Allen and Seaman propose that "an underlying reason for analyzing ordinal data as interval data might be the contention that parametric statistical tests (based on the central limit theorem) are more powerful than nonparametric alternatives. Also, conclusions and interpretations of parametric tests might be considered easier to interpret and provide more information than nonparametric alternatives. However, treating ordinal data as interval (or even ratio) data without examining the values of the dataset and the objectives of the analysis can both mislead and misrepresent the findings of a survey."[^allen2007]
 
-It is our opinion then, that for the data collected via our Likert responses appropriate non-parametric statistical measures for centrality include the mode and median, and for the spread of the distrubutions, the interquartile ranges. Other valid measures may include the use of Kruskall-Models for measures of variance, Chi-Squared and Fisher Exact tests for measures for significance, and simple distribution free methods such as tabulations and frequency counts.
+It is our opinion then, that for the data collected via our Likert responses appropriate non-parametric statistical measures for centrality include the mode and median, and for the spread of the distrubutions, the interquartile ranges. Other valid measures may include the use of Kruskall-Wallis models for measures of variance, Chi-Squared and Fisher exact tests for measures for significance, and simple distribution free methods such as tabulations and frequency counts.
 
-Given the earlier statement that ours is primarily a qualitative analysis, we will adopt a conservative approach and restrict our quantitative attention to tabulations and frequency counts. Where we group responses into Academic and Administrative categories, it is to contextualise discussion about the textual responses, and we do not offer an opinion on whether one os more- or less-positive than the other. \marginnote{In light of discussions at Staff Retreat we will, however, propose that Fisher's exact test (with the extension to matricies greater than 2x2 offered by Freeman-Halton) provide a statistically rigourous starting point for any analysis into the differences between these two groups. This will be discussed more in the *Areas for further study* section, and we will provide P-values for tests of non-random associations between Academic and Administrative responses in the Appendix as a motivating example.}
+Given the earlier statement that ours is primarily a qualitative analysis, we will adopt a conservative approach and restrict our quantitative attention to tabulations and frequency counts. Where we group responses into Academic and Administrative categories, it is to contextualise discussion about the textual responses, and we do not offer an opinion on whether one group is more- or less-positive than the other. \marginnote{In light of discussions at Staff Retreat we will, however, propose that Fisher's exact test (with the extension to matricies greater than 2x2 offered by Freeman-Halton) provide a statistically rigourous starting point for any analysis into the differences between these two groups. This will be discussed more in the *Areas for further study* section, and we will provide P-values for tests of non-random associations between Academic and Administrative responses in the Appendix as a motivating example.}
 
 
 # Methodology: Visualisations
@@ -52,11 +80,6 @@ The primary method for sumarising our Likert data will be via frequency tables. 
 [TODO: LA]
 
 
-
-
-
-
-# Assumptions
 
 \newpage
 
@@ -107,7 +130,7 @@ options(xtable.comment = FALSE)
 options(xtable.booktabs = TRUE)
 ```
 
-\newthought{With the caveats mentioned above in mind,} we present a brief high level overview of the data to provide a context for the qualitative analysis in the next section.
+\newthought{With the caveats mentioned above in mind,} we present a brief high level overview of the data to provide a context for the qualitative analysis in the next section. In these initial sections we will also print the R commands used to generate the data for the purposes of transparency. As mentioned earlier, the R commands for this whole report can be seen in the  associated R Markdown file used to create this PDF.
 
 ```{r, fig.height=8, fig.width=10, fig.fullwidth=TRUE, fig.caption="Normalised frequency counts for all responses, ordered from the highest number of Agree/Strongly Agree responses to the least. Includes response rates (n) for each question."}
 all_staff <- lkt[,2] == "All staff"
@@ -117,9 +140,7 @@ plot(likert(lkt[all_staff, 3:14]), text.size=4, plot.percent.neutral=FALSE,
 
 As can be seen in the right hand column, the response rates for each question remain $\ge$ 55 as indicated in grey, with the number of people not providing an answer indicated in red. (Presumably the higher non-response rate for "I enjoy AC staff camps" is due to the number of new staff hired over the year who have not yet attend a staff camp.)
 
-\newpage
-
-Here we have overlayed the responses received for each question in order to get a
+For this next plot we have overlayed the responses received for each question in order to get a
 broad sense of the overall sentiment of respondents.
 
 ```{r, fig.height=8, fig.width=10, fig.fullwidth=TRUE, fig.caption="TO DO"}
@@ -136,12 +157,12 @@ We achieve this via a KDE, \marginnote{KDE: Kernal Density Estimator} which requ
 smoothing kernel to be used (_gaussian_ in our case), and the amount of smoothing bandwidth, or
 standard deviation, to use to scale the smoothing kernel[^sheather1991]. This, however, violates our
 above statement that standard deviations should not be computed for ordinal data. In effect,
-to create this plot we have had to make the assumption that the distance between each response
-category is uniform.
+to create this plot we have had to make the assumption that the distance between each possible response
+is uniform.
 
-Plotting grouped bar charts of the responses to each question would be a more accurate
+Plotting grouped bar charts of responses to each question would be a more accurate
 representation of the data, but this would require positioning the questions next to each
-other rather than overlaying them. This would be difficult to interprete visually.
+other rather than overlaying them. This would be very difficult to interprete visually.
 
 
 \newpage
@@ -159,7 +180,7 @@ xtable(q3_summary, digits=0,
        caption='Frequency table for \"I think staff meetings are run well\"')
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I think AC staff meetings are run well\""}
 q3_lkt <- likert(lkt[3], grouping = lkt[,2]) # Group q3 responses by staff type
@@ -198,7 +219,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I enjoy AC staff camps\"", echo=FALSE}
 q <- 4
@@ -236,7 +257,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"AC graduation and other public events are run well\"", echo=FALSE}
 q <- 5
@@ -270,7 +291,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I feel valued by my manager for the work I do\"", echo=FALSE}
 q <- 6
@@ -304,7 +325,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I feel valued by my peers for the work I do\"", echo=FALSE}
 q <- 7
@@ -338,7 +359,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I feel I have the skills to do the job I've been asked to do\"", echo=FALSE}
 q <- 8
@@ -372,7 +393,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I have a clear understanding of the AC organisational structure\"", echo=FALSE}
 q <- 9
@@ -396,7 +417,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I feel I fit into the organisational culture of AC\"", echo=FALSE}
 q <- 10
@@ -430,7 +451,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I attend Chapel because I want to, not because I have to\"", echo=FALSE}
 q <- 11
@@ -464,7 +485,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"The mission and vision of the College has been clearly communicated to me\"", echo=FALSE}
 q <- 12
@@ -488,7 +509,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I consider my office area and staff facilities adequate in order to perform my duties\"", echo=FALSE}
 q <- 13
@@ -522,7 +543,7 @@ xtable(q_summary, digits=0,
        caption=paste('Frequency table for \"', names(lkt[q]), '\"', sep='') )
 ```
 
-And the corresponding visualisation of the proportional frequency count, by staff type:
+Corresponding visualisation of the proportional frequency count, grouped by staff type:
 
 ```{r, fig.height=2.5, fig.width=9, fig.cap = "Frequency table visualisation for \"I am likely to recommend AC as an employer of choice\"", echo=FALSE}
 q <- 14
