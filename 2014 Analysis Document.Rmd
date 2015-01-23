@@ -7,20 +7,23 @@ output: rmarkdown::tufte_handout
 
 # 2014 Staff Survey
 
-In keeping with our normal practice, we present the detailed analysis of this years Alphacrucis Staff Survey.
+\newthought{In keeping with our normal practice,} we present the detailed analysis of this years Alphacrucis Staff Survey.
 
 This document complements the high level overview presentation provided to all staff at the annual staff retreat.
 It is intended to go into further detail on each question, expand upon methodologies used and document the assumptions we have made.
-As in previous years - and in the spirit of open information, transparency and reproducible research - the quantitative dataset has been made available for further analysis. \marginnote{This copy of the dataset, along with the original version, are completely anonymous. The only difference between the two is that we don't include the qualitiative data in this copy, as we feel it has the potential to be \emph{more} identifiable.} We encourage individuals to perform their own analysis, particularly if their assumptions differ from ours, and present their findings to us all. To make this even easier, this PDF has been generated from a document written in *R Markdown* format, allowing the researcher to run all our computations on their own computer, and adjust them as they see fit.
+
+As in previous years - and in the spirit of open information, transparency and reproducible research - the quantitative dataset has been made available for further analysis. \marginnote{This copy of the dataset, along with the original version, remain anonymised. The only difference between the two datasets is that we don't include the qualitiative data in this copy, as we feel it has the potential to be *more* identifiable.} We encourage individuals to perform their own analysis, particularly if their assumptions differ from ours, and present their findings to us all. To make this even easier, this PDF has been generated from a document written in *R Markdown* format, allowing the researcher to run all our computations on their own computer, and adjust them as they see fit.
 
 
 ## Objectives of this analysis
 
 \newthought{In presenting the annual staff survey,} our objective is to convey the core themes of the data collected from staff, to staff, in a manner accessible to all staff. Note that this is not a statement about data accuracy, which it goes without saying should remain as high as possible at all times, but one of the scope of our analysis. There are many areas our analysis could have taken us, but we only persue those within the scope of our brief. This is not to say that analysis outside this scope is not interesting to us - we feel it provides a rich area of exploration and towards the end of this document have listed areas we would like to see our colleagues lend their skills to examining.
 
-\textbf{This is primarily a \emph{qualitative} study.} Although we collect quantitative data, its primary use is to categorise the qualitative feedback received. Secondary to this is it's use as a broad, high level overview of the survey to provide a context for the textual analysis to exist in.
+**This is primarily a _qualitative_ study.** Although we collect quantitative data, its primary use is to categorise the qualitative feedback received. Secondary to this is it's use as a broad, high level overview of the survey to provide a context for the textual analysis to exist in. As such we do not report any summary statistics, such as means, but simply present the number of reponses for each question in a frequency table.
 
 # Methodology: Data collection
+
+
 
 # Methodology: quantative data
 
