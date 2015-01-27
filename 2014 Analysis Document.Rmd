@@ -145,6 +145,8 @@ How these responses break down into Agree/Strongly Agree and Disagree/Strongly D
 
 --------
 
+\newpage
+
 For this next plot we have overlayed the responses received for each question in an attempt to get a
 broad sense of the overall sentiment of respondents.
 
@@ -169,6 +171,10 @@ is uniform.
 Plotting grouped bar charts of responses to each question would be a more accurate
 representation of the data, but this would require positioning the questions next to each
 other rather than overlaying them. This would be very difficult to interprete visually.
+
+--------
+
+We now present the results of the Likert-style questions.
 
 
 \newpage
